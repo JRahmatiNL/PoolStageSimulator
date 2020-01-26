@@ -21,12 +21,8 @@ namespace PoolStageSimulator.Core
 
         public IList<PoolStageRecord> SortPoolStageResults(IList<PoolStageRecord> poolStageRecords)
         {
-            return poolStageRecords
-                .OrderByDescending(r => r.TotalPoints)
-                .ThenByDescending(r => r.GoalDifference)
-                .ThenByDescending(r => r.TotalGoalsAgainstOpponents)
-                .ThenBy(r => r.TotalGoalsMadeByOpponents)
-                .ToList();
+            // https://stackoverflow.com/a/5430085
+            return poolStageRecords.OrderByDescending(r => r ).ToList();
         }
     }
 }
