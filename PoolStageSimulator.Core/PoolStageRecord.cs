@@ -16,7 +16,7 @@ namespace PoolStageSimulator.Core
         public int TotalGoalsMadeByOpponents { get; set; }
         // 5. required results within individual competitions
         // This is required when above 4 points remain equal between one or more teams
-        public List<Team> DefeatedTeams { get; set; }
+        public List<Team> DefeatedTeams { get; set; } = new List<Team>();
 
         public int CompareTo(PoolStageRecord other)
         {
