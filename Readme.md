@@ -25,7 +25,7 @@ https://github.com/straighteight/SpecFlow-VS-Mac-Integration
 Visual Studio code => .Net Core Team Explorer
 
 # Initial goals 
-There are multiple ways to keep track of tasks, but I will keep gaols here for now, since this project is still in a prototyping stage.
+There are multiple ways to keep track of tasks, but I will keep goals here for now, since this project is still in a prototyping stage.
 
 Tasks to accomplish:
 - A pool stage simulator that can simulate competitions where the strongest team often wins
