@@ -42,6 +42,7 @@ namespace PoolStageSimulator.Core
                     if(totalGoalsAgainstOpponent > totalGoalsMadeByOpponent)
                     {
                         teamsRecordToMutate.TotalPoints += TotalPointsToIncreaseOnWonRounds;
+                        teamsRecordToMutate.DefeatedTeams.Add(opponent);
                     }
                     else if(totalGoalsAgainstOpponent == totalGoalsMadeByOpponent)
                     {
@@ -51,6 +52,7 @@ namespace PoolStageSimulator.Core
                     else
                     {
                         opponentsRecordToMutate.TotalPoints += TotalPointsToIncreaseOnWonRounds;
+                        opponentsRecordToMutate.DefeatedTeams.Add(team);
                     }
                     teamsRecordToMutate.TotalGoalsAgainstOpponents += competitionResult.TotalGoalsAgainstOpponent;
                     teamsRecordToMutate.TotalGoalsMadeByOpponents += competitionResult.TotalGoalsMadeByOpponent;
