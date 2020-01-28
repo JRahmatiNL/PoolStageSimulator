@@ -1,4 +1,6 @@
-﻿# Intro 
+!!! Warning !!! This project is sill in a prototype stage, so it may contain a lot of bad practices, boilerplate code as well as code that is not stable enough to be used in production! Only use this code for experimentations or for feedback reasons.
+
+# Intro 
 The intention of this document is to cover the most important notes required for taking part
 on this git project. Please read those carefully before making any changes.
 Note that this project is meant to be portable.
