@@ -14,27 +14,27 @@ namespace PoolStageSimulator.Core
             _competitionManager = competitionManager;
         }
 
-        public IList<PoolStageRecord> Play(IList<Team> participatingTeams)
+        public IList<PoolStageTableRow> Play(IList<Team> participatingTeams)
         {
-            var poolStageRecords = new List<PoolStageRecord>();
+            var poolStageTableRows = new List<PoolStageTableRow>();
             for (int teamIndex = 0; teamIndex < participatingTeams.Count; teamIndex++)
             {
                 var team = participatingTeams[teamIndex];
-                var teamsRecordToMutate = poolStageRecords.SingleOrDefault(record => record.Team == team);
+                var teamsRecordToMutate = poolStageTableRows.SingleOrDefault(record => record.Team == team);
                 if(teamsRecordToMutate == null)
                 {
-                    teamsRecordToMutate = new PoolStageRecord(){ Team = team };
-                    poolStageRecords.Add(teamsRecordToMutate);
+                    teamsRecordToMutate = new PoolStageTableRow(){ Team = team };
+                    poolStageTableRows.Add(teamsRecordToMutate);
                 }
 
                 for (int opponentIndex = teamIndex + 1; opponentIndex < participatingTeams.Count; opponentIndex++)
                 {
                     var opponent = participatingTeams[opponentIndex];
-                    var opponentsRecordToMutate = poolStageRecords.SingleOrDefault(record => record.Team == opponent);
+                    var opponentsRecordToMutate = poolStageTableRows.SingleOrDefault(record => record.Team == opponent);
                     if(opponentsRecordToMutate == null)
                     {
-                        opponentsRecordToMutate = new PoolStageRecord(){ Team = opponent };
-                        poolStageRecords.Add(opponentsRecordToMutate);
+                        opponentsRecordToMutate = new PoolStageTableRow(){ Team = opponent };
+                        poolStageTableRows.Add(opponentsRecordToMutate);
                     }
                     var competitionResult = _competitionManager.RunCompetition(team, opponent);
                     var totalGoalsAgainstOpponent = competitionResult.TotalGoalsAgainstOpponent;
@@ -59,7 +59,7 @@ namespace PoolStageSimulator.Core
                     teamsRecordToMutate.GoalDifference += competitionResult.GoalDifference;
                 }
             }
-            return _competitionManager.SortPoolStageResults(poolStageRecords);
+            return _competitionManager.SortPoolStageResults(poolStageTableRows);
         }
     }
 }

@@ -27,16 +27,16 @@ namespace PoolStageSimulator.Tests
         public void SortResultsBasedOnIndividualCompetitionsIfNecessary()
         {
             // 1. Arrange
-            var resultsToSort = new List<PoolStageRecord>()
+            var resultsToSort = new List<PoolStageTableRow>()
             {
-                new PoolStageRecord { 
+                new PoolStageTableRow { 
                     Team = _teamC
                 },
-                new PoolStageRecord { 
+                new PoolStageTableRow { 
                     Team = _teamB, 
                     DefeatedTeams = new List<Team>() { _teamC } 
                 },
-                new PoolStageRecord { 
+                new PoolStageTableRow { 
                     Team = _teamA, 
                     DefeatedTeams = new List<Team>() { _teamB, _teamC } 
                 },

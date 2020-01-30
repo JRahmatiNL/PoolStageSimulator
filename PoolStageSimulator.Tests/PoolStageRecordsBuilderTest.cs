@@ -5,14 +5,14 @@ using PoolStageSimulator.Core;
 namespace PoolStageSimulator.Tests
 {
     [TestFixture]
-    public class PoolStageRecordsBuilderTest
+    public class PoolStageTableRowsBuilderTest
     {
-        public IPoolStageRecordsBuilder PoolStageRecordsBuilder { get; private set; }
+        public IPoolStageTableRowsBuilder PoolStageTableRowsBuilder { get; private set; }
 
         [SetUp]
         public void Setup()
         {
-            PoolStageRecordsBuilder = new PoolStageRecordsBuilder();
+            PoolStageTableRowsBuilder = new PoolStageTableRowsBuilder();
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace PoolStageSimulator.Tests
                 TotalGoalsAgainstOpponent = 0,
                 TotalGoalsMadeByOpponent = 1,
             };
-            PoolStageRecordsBuilder.Add(mainTeamsCompetitionResult);
+            PoolStageTableRowsBuilder.Add(mainTeamsCompetitionResult);
             var someOtherCompetitionResult = new CompetitionResult
             {
                 ParticipatingTeam = new Team(""),
@@ -38,14 +38,14 @@ namespace PoolStageSimulator.Tests
                 TotalGoalsAgainstOpponent = 0,
                 TotalGoalsMadeByOpponent = 0,
             };
-            PoolStageRecordsBuilder.Add(someOtherCompetitionResult);
-            var poolStageRecords = PoolStageRecordsBuilder.Build().ToList();
+            PoolStageTableRowsBuilder.Add(someOtherCompetitionResult);
+            var poolStageTableRows = PoolStageTableRowsBuilder.Build().ToList();
 
             // 3. Assert
-            var opponentsRecord = poolStageRecords.Single(record => record.Team == opponentsTeam);
+            var opponentsRow = poolStageTableRows.Single(record => record.Team == opponentsTeam);
             Assert.AreEqual(
                 mainTeamsCompetitionResult.TotalGoalsMadeByOpponent, 
-                opponentsRecord.TotalGoalsAgainstOpponents
+                opponentsRow.TotalGoalsAgainstOpponents
             );
         }
     }

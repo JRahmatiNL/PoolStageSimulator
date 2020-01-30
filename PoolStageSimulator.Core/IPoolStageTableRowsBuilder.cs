@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace PoolStageSimulator.Core
 {
-    public interface IPoolStageRecordsBuilder
+    public interface IPoolStageTableRowsBuilder
     {
-        IEnumerable<PoolStageRecord> Build();
+        IEnumerable<PoolStageTableRow> Build();
         void Add(CompetitionResult mainTeamsCompetitionResult);
     }
 }
