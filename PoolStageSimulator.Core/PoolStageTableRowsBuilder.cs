@@ -48,27 +48,36 @@ namespace PoolStageSimulator.Core
                 var totalGoalsMadeByOpponent = competitionResult.TotalGoalsMadeByOpponent;
                 if(totalGoalsAgainstOpponent > totalGoalsMadeByOpponent)
                 {
-                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
+                    teamsPoolStageTableRow.TotalPoints += 
+                        _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
                     teamsPoolStageTableRow.DefeatedTeams.Add(competitionResult.OpponentsTeam);
                 }
                 else if(totalGoalsAgainstOpponent == totalGoalsMadeByOpponent)
                 {
-                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
-                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
+                    teamsPoolStageTableRow.TotalPoints += 
+                        _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
+                    teamsPoolStageTableRow.TotalPoints += 
+                        _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
                 }
                 else
                 {
-                    opponentsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
+                    opponentsPoolStageTableRow.TotalPoints += 
+                        _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
                     opponentsPoolStageTableRow.DefeatedTeams.Add(competitionResult.ParticipatingTeam);
                 }
 
-                opponentsPoolStageTableRow.TotalGoalsAgainstOpponents += competitionResult.TotalGoalsMadeByOpponent;
-                opponentsPoolStageTableRow.TotalGoalsMadeByOpponents += competitionResult.TotalGoalsAgainstOpponent;
+                opponentsPoolStageTableRow.TotalGoalsAgainstOpponents += 
+                    competitionResult.TotalGoalsMadeByOpponent;
+                opponentsPoolStageTableRow.TotalGoalsMadeByOpponents += 
+                    competitionResult.TotalGoalsAgainstOpponent;
                 opponentsPoolStageTableRow.GoalDifference += -competitionResult.GoalDifference;
 
-                teamsPoolStageTableRow.TotalGoalsAgainstOpponents += competitionResult.TotalGoalsAgainstOpponent;
-                teamsPoolStageTableRow.TotalGoalsMadeByOpponents += competitionResult.TotalGoalsMadeByOpponent;
-                teamsPoolStageTableRow.GoalDifference += competitionResult.GoalDifference;
+                teamsPoolStageTableRow.TotalGoalsAgainstOpponents += 
+                    competitionResult.TotalGoalsAgainstOpponent;
+                teamsPoolStageTableRow.TotalGoalsMadeByOpponents += 
+                    competitionResult.TotalGoalsMadeByOpponent;
+                teamsPoolStageTableRow.GoalDifference += 
+                    competitionResult.GoalDifference;
             }
             return _poolStageTableRows;
         }
