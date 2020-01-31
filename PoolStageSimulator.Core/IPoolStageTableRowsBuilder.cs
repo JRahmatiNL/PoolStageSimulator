@@ -4,7 +4,7 @@ namespace PoolStageSimulator.Core
 {
     public interface IPoolStageTableRowsBuilder
     {
-        IEnumerable<PoolStageTableRow> Build();
+        IList<PoolStageTableRow> Build();
         void Add(CompetitionResult mainTeamsCompetitionResult);
     }
 }
