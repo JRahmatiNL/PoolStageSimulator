@@ -16,7 +16,7 @@ namespace PoolStageSimulator.Tests
         }
 
         [Test]
-        public void Build_UsingMainTeamsLostCompetition_IncludesOpponentsTotalGoalsInResults()
+        public void Build_UsingMainTeamsLostCompetition_IncludesOpponentsTotalsInResults()
         {
             // 1. Arrange
             var mainTeam = new Team("Loser");
@@ -39,14 +39,14 @@ namespace PoolStageSimulator.Tests
                 TotalGoalsMadeByOpponent = 0,
             };
             PoolStageTableRowsBuilder.Add(someOtherCompetitionResult);
-            var poolStageTableRows = PoolStageTableRowsBuilder.Build().ToList();
+            var poolStageTableRows = PoolStageTableRowsBuilder.Build();
 
             // 3. Assert
             var opponentsRow = poolStageTableRows.Single(record => record.Team == opponentsTeam);
-            Assert.AreEqual(
-                mainTeamsCompetitionResult.TotalGoalsMadeByOpponent, 
-                opponentsRow.TotalGoalsAgainstOpponents
-            );
+            Assert.AreEqual(3, opponentsRow.TotalPoints);
+            Assert.AreEqual(0, opponentsRow.TotalGoalsMadeByOpponents);
+            Assert.AreEqual(1, opponentsRow.TotalGoalsAgainstOpponents);
+            Assert.AreEqual(1, opponentsRow.GoalDifference);
         }
     }
 }
