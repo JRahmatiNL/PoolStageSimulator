@@ -24,6 +24,17 @@ namespace PoolStageSimulator.Tests
         }
 
         [Test]
+        public void RunCompetition_WithTeamAAndB_Returns_ResultWithTeamAAsParticipantAndBAsOpponent()
+        {
+            // TODO: Separate this types of tests as unit tests if necessary!
+
+            var result = _competitionManager.RunCompetition(_teamA, _teamB);
+
+            Assert.AreEqual(_teamA, result.ParticipatingTeam);
+            Assert.AreEqual(_teamB, result.OpponentsTeam);
+        }
+
+        [Test]
         public void SortResultsBasedOnIndividualCompetitionsIfNecessary()
         {
             // 1. Arrange
