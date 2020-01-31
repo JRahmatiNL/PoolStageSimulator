@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using PoolStageSimulator.Core;
@@ -9,6 +10,7 @@ namespace PoolStageSimulator.Tests
     {
         private PoolStageConfiguration _poolStageConfiguration;
         private IPoolStageTableRowsBuilder _poolStageTableRowsBuilder;
+        private IList<CompetitionResult> _2CompetitionResults_With4UniqueTeams_Returns4PoolStageTableRows;
 
         [SetUp]
         public void Setup()
@@ -19,6 +21,37 @@ namespace PoolStageSimulator.Tests
                 TotalPointsToIncreaseOnEqualRounds = 1
             };
             _poolStageTableRowsBuilder = new PoolStageTableRowsBuilder(_poolStageConfiguration);
+
+            _2CompetitionResults_With4UniqueTeams_Returns4PoolStageTableRows = new List<CompetitionResult>
+            {
+                new CompetitionResult { 
+                    ParticipatingTeam = new Team("Team1"),
+                    OpponentsTeam = new Team("Team2") 
+                },
+                new CompetitionResult { 
+                    ParticipatingTeam = new Team("Team3"),
+                    OpponentsTeam = new Team("Team4") 
+                },
+            };
+        }
+
+        [Test]
+        public void Build_Using2Competitions_With4UniqueTeams_Returns4PoolStageTableRows()
+        {
+            // 1. Arrange
+            var simulator = new Core.PoolStageSimulator(
+                new SoccerCompetitiontManager()
+            );
+
+            // 2. Act
+            foreach (var competitionResult in _2CompetitionResults_With4UniqueTeams_Returns4PoolStageTableRows)
+            {
+                _poolStageTableRowsBuilder.Add(competitionResult);                
+            }
+            var poolStageTableRows = _poolStageTableRowsBuilder.Build();
+
+            // 3. Assert
+            Assert.AreEqual(4, poolStageTableRows.Count);
         }
 
         [Test]
