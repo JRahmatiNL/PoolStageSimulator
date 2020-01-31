@@ -14,7 +14,7 @@ namespace PoolStageSimulator.Core
 
         public IList<PoolStageTableRow> Play(IList<Team> participatingTeams)
         {
-            var poolStageTableRowsBuilder = new PoolStageTableRowsBuilder();;
+            var poolStageTableRowsBuilder = new PoolStageTableRowsBuilder(new PoolStageConfiguration());
             
             for (int teamIndex = 0; teamIndex < participatingTeams.Count; teamIndex++)
             {

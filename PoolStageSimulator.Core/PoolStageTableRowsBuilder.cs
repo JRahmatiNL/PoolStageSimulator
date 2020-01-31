@@ -5,12 +5,15 @@ using System.Linq;
 namespace PoolStageSimulator.Core
 {
     public class PoolStageTableRowsBuilder : IPoolStageTableRowsBuilder
-    {
-        private const int TotalPointsToIncreaseOnWonRounds = 3;
-        private const int TotalPointsToIncreaseOnEqualRounds = 1;
-        
+    {   
         private IList<CompetitionResult> _competitionResults = new List<CompetitionResult>();
         private List<PoolStageTableRow> _poolStageTableRows = new List<PoolStageTableRow>();
+        private PoolStageConfiguration _poolStageConfiguration;
+
+        public PoolStageTableRowsBuilder(PoolStageConfiguration poolStageConfiguration)
+        {
+            _poolStageConfiguration = poolStageConfiguration;       
+        }
 
         public void Add(CompetitionResult competitionResult)
         {
@@ -45,22 +48,27 @@ namespace PoolStageSimulator.Core
                 var totalGoalsMadeByOpponent = competitionResult.TotalGoalsMadeByOpponent;
                 if(totalGoalsAgainstOpponent > totalGoalsMadeByOpponent)
                 {
-                    teamsPoolStageTableRow.TotalPoints += TotalPointsToIncreaseOnWonRounds;
+                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
                     teamsPoolStageTableRow.DefeatedTeams.Add(competitionResult.OpponentsTeam);
                 }
                 else if(totalGoalsAgainstOpponent == totalGoalsMadeByOpponent)
                 {
-                    teamsPoolStageTableRow.TotalPoints += TotalPointsToIncreaseOnEqualRounds;
-                    teamsPoolStageTableRow.TotalPoints += TotalPointsToIncreaseOnEqualRounds;
+                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
+                    teamsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnEqualRounds;
                 }
                 else
                 {
-                    opponentsPoolStageTableRow.TotalPoints += TotalPointsToIncreaseOnWonRounds;
+                    opponentsPoolStageTableRow.TotalPoints += _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds;
                     opponentsPoolStageTableRow.DefeatedTeams.Add(competitionResult.ParticipatingTeam);
                 }
+
+                opponentsPoolStageTableRow.TotalGoalsAgainstOpponents += competitionResult.TotalGoalsMadeByOpponent;
+                opponentsPoolStageTableRow.TotalGoalsMadeByOpponents += competitionResult.TotalGoalsAgainstOpponent;
+                opponentsPoolStageTableRow.GoalDifference += -competitionResult.GoalDifference;
+
                 teamsPoolStageTableRow.TotalGoalsAgainstOpponents += competitionResult.TotalGoalsAgainstOpponent;
                 teamsPoolStageTableRow.TotalGoalsMadeByOpponents += competitionResult.TotalGoalsMadeByOpponent;
-                teamsPoolStageTableRow.GoalDifference += competitionResult.GoalDifference;                
+                teamsPoolStageTableRow.GoalDifference += competitionResult.GoalDifference;
             }
             return _poolStageTableRows;
         }
