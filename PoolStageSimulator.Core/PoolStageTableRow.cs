@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace PoolStageSimulator.Core
 {
-    public class PoolStageRecord : IEquatable<PoolStageRecord> , IComparable<PoolStageRecord>
+    public class PoolStageTableRow : IEquatable<PoolStageTableRow> , IComparable<PoolStageTableRow>
     {
         public Team Team { get; set; }
         // 1. points
@@ -20,7 +20,7 @@ namespace PoolStageSimulator.Core
         public string DefeatedTeamsByName => string.Join(", ", DefeatedTeams.Select(dt => dt.Name));
         public List<Team> DefeatedTeams { get; set; } = new List<Team>();
 
-        public int CompareTo(PoolStageRecord other)
+        public int CompareTo(PoolStageTableRow other)
         {
             // Based on https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.sort?view=netframework-4.8
             // A return value of 0 means this record is equal to the other record
@@ -47,7 +47,7 @@ namespace PoolStageSimulator.Core
             return 0;
         }
 
-        public bool Equals(PoolStageRecord other)
+        public bool Equals(PoolStageTableRow other)
         {
             return CompareTo(other) == 0;
         }

@@ -19,7 +19,7 @@ namespace PoolStageSimulator.ConsoleApplication
                 Console.WriteLine("Simulation ended with following results: ");
                 Console.WriteLine("=========================================");
                 var consoleTable = ConsoleTables.ConsoleTable.From(results);
-                consoleTable.Columns.Remove(nameof(PoolStageRecord.DefeatedTeams));
+                consoleTable.Columns.Remove(nameof(PoolStageTableRow.DefeatedTeams));
                 consoleTable.Write();
             }
         }

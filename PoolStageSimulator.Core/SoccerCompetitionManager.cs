@@ -14,15 +14,17 @@ namespace PoolStageSimulator.Core
 
             return new CompetitionResult
             {
+                ParticipatingTeam = team,
+                OpponentsTeam = opponent,
                 TotalGoalsAgainstOpponent = Math.Max(randomAttackLevel / 2, randomAttackLevel - opponent.AverageDefenseLevel),
                 TotalGoalsMadeByOpponent = Math.Max(0, opponent.AverageAttackLevel - team.AverageDefenseLevel),
             };
         }
 
-        public IList<PoolStageRecord> SortPoolStageResults(IList<PoolStageRecord> poolStageRecords)
+        public IList<PoolStageTableRow> SortPoolStageResults(IList<PoolStageTableRow> poolStageTableRows)
         {
             // https://stackoverflow.com/a/5430085
-            return poolStageRecords.OrderByDescending(r => r ).ToList();
+            return poolStageTableRows.OrderByDescending(r => r ).ToList();
         }
     }
 }
