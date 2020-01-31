@@ -14,6 +14,8 @@ namespace PoolStageSimulator.Core
 
             return new CompetitionResult
             {
+                ParticipatingTeam = team,
+                OpponentsTeam = opponent,
                 TotalGoalsAgainstOpponent = Math.Max(randomAttackLevel / 2, randomAttackLevel - opponent.AverageDefenseLevel),
                 TotalGoalsMadeByOpponent = Math.Max(0, opponent.AverageAttackLevel - team.AverageDefenseLevel),
             };
