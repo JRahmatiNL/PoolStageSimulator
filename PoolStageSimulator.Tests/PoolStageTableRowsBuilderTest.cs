@@ -7,12 +7,18 @@ namespace PoolStageSimulator.Tests
     [TestFixture]
     public class PoolStageTableRowsBuilderTest
     {
-        public IPoolStageTableRowsBuilder PoolStageTableRowsBuilder { get; private set; }
+        private PoolStageConfiguration _poolStageConfiguration;
+        private IPoolStageTableRowsBuilder _poolStageTableRowsBuilder;
 
         [SetUp]
         public void Setup()
         {
-            PoolStageTableRowsBuilder = new PoolStageTableRowsBuilder();
+            _poolStageConfiguration = new PoolStageConfiguration
+            {
+                TotalPointsToIncreaseOnWonRounds = 5,
+                TotalPointsToIncreaseOnEqualRounds = 1
+            };
+            _poolStageTableRowsBuilder = new PoolStageTableRowsBuilder(_poolStageConfiguration);
         }
 
         [Test]
@@ -30,7 +36,7 @@ namespace PoolStageSimulator.Tests
                 TotalGoalsAgainstOpponent = 0,
                 TotalGoalsMadeByOpponent = 1,
             };
-            PoolStageTableRowsBuilder.Add(mainTeamsCompetitionResult);
+            _poolStageTableRowsBuilder.Add(mainTeamsCompetitionResult);
             var someOtherCompetitionResult = new CompetitionResult
             {
                 ParticipatingTeam = new Team(""),
@@ -38,12 +44,15 @@ namespace PoolStageSimulator.Tests
                 TotalGoalsAgainstOpponent = 0,
                 TotalGoalsMadeByOpponent = 0,
             };
-            PoolStageTableRowsBuilder.Add(someOtherCompetitionResult);
-            var poolStageTableRows = PoolStageTableRowsBuilder.Build();
+            _poolStageTableRowsBuilder.Add(someOtherCompetitionResult);
+            var poolStageTableRows = _poolStageTableRowsBuilder.Build();
 
             // 3. Assert
             var opponentsRow = poolStageTableRows.Single(record => record.Team == opponentsTeam);
-            Assert.AreEqual(3, opponentsRow.TotalPoints);
+            Assert.AreEqual(
+                _poolStageConfiguration.TotalPointsToIncreaseOnWonRounds, 
+                opponentsRow.TotalPoints
+            );
             Assert.AreEqual(0, opponentsRow.TotalGoalsMadeByOpponents);
             Assert.AreEqual(1, opponentsRow.TotalGoalsAgainstOpponents);
             Assert.AreEqual(1, opponentsRow.GoalDifference);
